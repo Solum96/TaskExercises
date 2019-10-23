@@ -46,7 +46,12 @@ namespace TaskExercise
                 
                 for(int i = 0; i < 10; i++)
                 {
-                    while(!ct.IsCancellationRequested)
+                    if(cts.IsCancellationRequested)
+                    {
+                        cts = new CancellationTokenSource();
+                        return;
+                    }
+                    else
                     {
                         Dispatcher.Invoke(() =>
                         {
