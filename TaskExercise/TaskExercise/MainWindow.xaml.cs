@@ -22,26 +22,38 @@ namespace TaskExercise
     /// </summary>
     public partial class MainWindow : Window
     {
-        ConcurrentBag<string> myList = new ConcurrentBag<string>();
+        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationToken ct;
 
         public MainWindow()
         {
             InitializeComponent();
+            ct = cts.Token;
             addString.Click += OnAddStringClick;
             addStringTimes10.Click += OnAddString10Click;
+            stopButton.Click += CancelTasks;
+        }
+
+        private void CancelTasks(object sender, RoutedEventArgs e)
+        {
+            cts.Cancel();
         }
 
         private void OnAddString10Click(object sender, RoutedEventArgs e)
         {
             Task.Run(() =>
             {
-                for (int i = 0; i < 10; i++)
+                
+                for(int i = 0; i < 10; i++)
                 {
-                    Dispatcher.Invoke(() =>
+                    while(!ct.IsCancellationRequested)
                     {
-                        listBox.Items.Add("string");
-                    });
-                    Thread.Sleep(1000);
+                        Dispatcher.Invoke(() =>
+                        {
+                            listBox.Items.Add("string");
+                        });
+                        Thread.Sleep(1000);
+                    }
                 }
             });
         }
