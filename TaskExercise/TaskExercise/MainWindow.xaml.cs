@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace TaskExercise
     /// </summary>
     public partial class MainWindow : Window
     {
+        ConcurrentBag<string> myList = new ConcurrentBag<string>();
+
         public MainWindow()
         {
             InitializeComponent();
+            addString.Click += OnAddStringClick;            
+        }
+
+        private void OnAddStringClick(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() => { listBox.Items.Add("dis string"); });
         }
     }
 }
