@@ -10,6 +10,7 @@
         <Button x:Name="addString" Content="Add String" HorizontalAlignment="Left" Margin="205,196,0,0" VerticalAlignment="Top" Width="104"/>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="457,160,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="addStringTimes10" Content="Add string x10" HorizontalAlignment="Left" Margin="205,221,0,0" VerticalAlignment="Top" Width="104"/>
+        <Button x:Name="stopButton" Content="STOP" HorizontalAlignment="Left" Margin="-318,10,0,0" VerticalAlignment="Top" Width="1110" Background="Red" Height="153"/>
 
     </Grid>
 </Window>
