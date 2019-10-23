@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,23 @@ namespace TaskExercise
         public MainWindow()
         {
             InitializeComponent();
-            addString.Click += OnAddStringClick;            
+            addString.Click += OnAddStringClick;
+            addStringTimes10.Click += OnAddString10Click;
+        }
+
+        private void OnAddString10Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        listBox.Items.Add("string");
+                    });
+                    Thread.Sleep(1000);
+                }
+            });
         }
 
         private void OnAddStringClick(object sender, RoutedEventArgs e)
