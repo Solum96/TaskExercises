@@ -37,18 +37,24 @@ namespace TaskExercise
         private void CancelTasks(object sender, RoutedEventArgs e)
         {
             cts.Cancel();
+            stopButton.IsEnabled = false;
         }
 
         private void OnAddString10Click(object sender, RoutedEventArgs e)
         {
             Task.Run(() =>
             {
-                
+                Dispatcher.Invoke(() =>
+                {
+                    addStringTimes10.IsEnabled = false;
+                    stopButton.IsEnabled = true;
+                });
                 for(int i = 0; i < 10; i++)
                 {
                     if(cts.IsCancellationRequested)
                     {
                         cts = new CancellationTokenSource();
+                        Dispatcher.Invoke(() => { addStringTimes10.IsEnabled = true; });
                         return;
                     }
                     else
