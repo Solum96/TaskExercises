@@ -24,14 +24,28 @@ namespace TaskExercise
     {
         CancellationTokenSource cts = new CancellationTokenSource();
         CancellationToken ct;
+        ManualResetEvent mrn;
 
         public MainWindow()
         {
             InitializeComponent();
             ct = cts.Token;
+            mrn = new ManualResetEvent(false);
             addString.Click += OnAddStringClick;
             addStringTimes10.Click += OnAddString10Click;
             stopButton.Click += CancelTasks;
+            pausButton.Click += PausTasks;
+            resumeButton.Click += ResumeTasks;
+        }
+
+        private void PausTasks(object sender, RoutedEventArgs e)
+        {
+            mrn.Reset();
+        }
+
+        private void ResumeTasks(object sender, RoutedEventArgs e)
+        {
+            mrn.Set();
         }
 
         private void CancelTasks(object sender, RoutedEventArgs e)
@@ -44,6 +58,7 @@ namespace TaskExercise
         {
             Task.Run(() =>
             {
+                mrn.WaitOne();
                 Dispatcher.Invoke(() =>
                 {
                     addStringTimes10.IsEnabled = false;
@@ -65,6 +80,7 @@ namespace TaskExercise
                         });
                         Thread.Sleep(1000);
                     }
+                    
                 }
             });
         }
