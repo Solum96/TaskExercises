@@ -30,7 +30,7 @@ namespace TaskExercise
         {
             InitializeComponent();
             ct = cts.Token;
-            mrn = new ManualResetEvent(false);
+            mrn = new ManualResetEvent(true);
             addString.Click += OnAddStringClick;
             addStringTimes10.Click += OnAddString10Click;
             stopButton.Click += CancelTasks;
@@ -58,7 +58,6 @@ namespace TaskExercise
         {
             Task.Run(() =>
             {
-                mrn.WaitOne();
                 Dispatcher.Invoke(() =>
                 {
                     addStringTimes10.IsEnabled = false;
@@ -66,7 +65,8 @@ namespace TaskExercise
                 });
                 for(int i = 0; i < 10; i++)
                 {
-                    if(cts.IsCancellationRequested)
+                    mrn.WaitOne();
+                    if (cts.IsCancellationRequested)
                     {
                         cts = new CancellationTokenSource();
                         Dispatcher.Invoke(() => { addStringTimes10.IsEnabled = true; });
