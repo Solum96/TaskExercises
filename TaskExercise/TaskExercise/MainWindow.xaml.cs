@@ -82,6 +82,11 @@ namespace TaskExercise
                     }
                     
                 }
+                Dispatcher.Invoke(() =>
+                {
+                    stopButton.IsEnabled = false;
+                    addStringTimes10.IsEnabled = true;
+                });
             });
         }
 
