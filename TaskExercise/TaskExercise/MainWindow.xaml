@@ -10,7 +10,9 @@
         <Button x:Name="addString" Content="Add String" HorizontalAlignment="Left" Margin="205,196,0,0" VerticalAlignment="Top" Width="104"/>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="457,160,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="addStringTimes10" Content="Add string x10" HorizontalAlignment="Left" Margin="205,221,0,0" VerticalAlignment="Top" Width="104"/>
-        <Button x:Name="stopButton" Content="STOP" HorizontalAlignment="Left" Margin="326,64,0,0" VerticalAlignment="Top" Width="126" Background="Red" Height="65" IsEnabled="False"/>
+        <Button x:Name="stopButton" Content="STOP" HorizontalAlignment="Left" Margin="457,64,0,0" VerticalAlignment="Top" Width="126" Background="Red" Height="65" IsEnabled="False"/>
+        <Button x:Name="pausButton" Content="Paus" HorizontalAlignment="Left" Margin="158,64,0,0" VerticalAlignment="Top" Width="126" Height="65"/>
+        <Button x:Name="resumeButton" Content="Resume" HorizontalAlignment="Left" Margin="309,64,0,0" VerticalAlignment="Top" Width="126" Height="65"/>
 
     </Grid>
 </Window>
